@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Images Diagonally</title>
+    <style>
+         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+            position: relative; /* 使 body 成为绝对定位的参考 */
+        }
+
+        .image-container {
+            position: relative; /* 使子元素能够绝对定位 */
+            width: 800px; /* 设置容器的宽度 */
+            height: 600px; /* 设置容器的高度 */
+        }
+
+        img {
+            width: 300px; /* 调整图片大小 */
+            height: auto;
+            position: absolute; /* 绝对定位 */
+        }
+
+        /* 定义每张图片的位置 */
+        #alice1 {
+            top: 0;
+            left: 0;
+        }
+
+        #alice2 {
+            top: 200px;
+            left: 250px;
+        }
+
+        #alice3 {
+            top: 400px;
+            left: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="image-container">
+        <img id="alice1" src="万穗爷.png" alt="Alice 1">
+        <img id="alice2" src="万穗爷.png" alt="Alice 2">
+        <img id="alice3" src="万穗爷.png" alt="Alice 3">
+    </div>
+</div>
+
+<script>
+        const aliceTumbling = [
+          { transform: "rotate(0) scale(1)" },
+          { transform: "rotate(360deg) scale(0)" },
+        ];
+
+        const aliceTiming = {
+            duration: 2000,
+            iterations: 1,
+            fill: "forwards",
+        };
+
+        const alice1 = document.querySelector("#alice1");
+        const alice2 = document.querySelector("#alice2");
+        const alice3 = document.querySelector("#alice3");
+
+        alice1.animate(aliceTumbling, aliceTiming).finished.then(() => {
+            alice2.animate(aliceTumbling, aliceTiming).finished.then(() => {
+                alice3.animate(aliceTumbling, aliceTiming).finished.then(() => {
+                    console.log("所有动画已完成");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
